@@ -165,7 +165,7 @@ public class Client extends Thread {
 
             transaction[i].setTransactionStatus("sent");   /* Set current transaction status */
 
-            System.out.println("\n DEBUG : Client.sendTransactions() - sending transaction on account " + transaction[i].getAccountNumber());
+            //System.out.println("\n DEBUG : Client.sendTransactions() - sending transaction on account " + transaction[i].getAccountNumber());
 
             Network.send(transaction[i]);                            /* Transmit current transaction */
             i++;
@@ -239,7 +239,7 @@ public class Client extends Thread {
             receiveTransactions(transact);
             System.out.println("\nTerminating client receiving thread"); // add receiving time
             Network.disconnect(Network.getClientIP());
-            this.interrupt();
+            //this.interrupt();
         }
     }
 }
