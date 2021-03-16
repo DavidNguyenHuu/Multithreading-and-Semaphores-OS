@@ -107,7 +107,7 @@ public class Network extends Thread {
      * @return clientConnectionStatus
      * @param
      */
-    public /*synchronized*/ static String getClientConnectionStatus()
+    public synchronized static String getClientConnectionStatus()
     {
         return clientConnectionStatus;
     }
@@ -173,7 +173,7 @@ public class Network extends Thread {
      * @return inBufferStatus
      * @param
      */
-    public /*synchronized*/ static String getInBufferStatus()// added synchronized
+    public synchronized static String getInBufferStatus()// added synchronized
     {
         return inBufferStatus;
     }
@@ -184,7 +184,7 @@ public class Network extends Thread {
      * @return
      * @param inBufStatus
      */
-    public /*synchronized*/ static void setInBufferStatus(String inBufStatus)// added synchronized
+    public synchronized static void setInBufferStatus(String inBufStatus)// added synchronized
     {
         inBufferStatus = inBufStatus;
     }
@@ -195,7 +195,7 @@ public class Network extends Thread {
      * @return outBufferStatus
      * @param
      */
-    public /*synchronized*/ static String getOutBufferStatus() // added synchronized
+    public synchronized static String getOutBufferStatus() // added synchronized
     {
         return outBufferStatus;
     }
@@ -206,7 +206,7 @@ public class Network extends Thread {
      * @return
      * @param outBufStatus
      */
-    public /*synchronized*/ static void setOutBufferStatus(String outBufStatus) // added sync
+    public synchronized static void setOutBufferStatus(String outBufStatus) // added sync
     {
         outBufferStatus = outBufStatus;
     }
@@ -217,7 +217,7 @@ public class Network extends Thread {
      * @return networkStatus
      * @param
      */
-    public /*synchronized*/ static String getNetworkStatus() // added synchronized
+    public synchronized static String getNetworkStatus() // added synchronized
     {
         return networkStatus;
     }
@@ -239,7 +239,7 @@ public class Network extends Thread {
      * @return inputIndexClient
      * @param
      */
-    public /*synchronized*/ static int getinputIndexClient()
+    public synchronized static int getinputIndexClient()
     {
         return inputIndexClient;
     }
@@ -250,7 +250,7 @@ public class Network extends Thread {
      * @return
      * @param i1
      */
-    public /*synchronized*/ static void setinputIndexClient(int i1)// added synchronized
+    public synchronized static void setinputIndexClient(int i1)// added synchronized
     {
 
         inputIndexClient = i1;
@@ -262,7 +262,7 @@ public class Network extends Thread {
      * @return inputIndexServer
      * @param
      */
-    public /*synchronized*/  static int getinputIndexServer()// added synchronized
+    public synchronized static int getinputIndexServer()// added synchronized
     {
         return inputIndexServer;
     }
@@ -273,7 +273,7 @@ public class Network extends Thread {
      * @return
      * @param i2
      */
-    public /*synchronized*/  static void setinputIndexServer(int i2)// added synchronized
+    public synchronized static void setinputIndexServer(int i2)// added synchronized
     {
         inputIndexServer = i2;
     }
@@ -284,7 +284,7 @@ public class Network extends Thread {
      * @return outputIndexServer
      * @param
      */
-    public /*synchronized*/  static int getoutputIndexServer()// added synchronized
+    public synchronized static int getoutputIndexServer()// added synchronized
     {
         return outputIndexServer;
     }
@@ -295,7 +295,7 @@ public class Network extends Thread {
      * @return
      * @param o1
      */
-    public /*synchronized*/  static void setoutputIndexServer(int o1)// added synchronized
+    public synchronized static void setoutputIndexServer(int o1)// added synchronized
     {
 
         outputIndexServer = o1;
@@ -307,7 +307,7 @@ public class Network extends Thread {
      * @return outputIndexClient
      * @param
      */
-    public /*synchronized*/  static int getoutputIndexClient()// added synchronized
+    public synchronized static int getoutputIndexClient()// added synchronized
     {
         return outputIndexClient;
     }
@@ -318,7 +318,7 @@ public class Network extends Thread {
      * @return
      * @param o2
      */
-    public /*synchronized*/  static void setoutputIndexClient(int o2)// added synchronized
+    public synchronized static void setoutputIndexClient(int o2)// added synchronized
     {
         outputIndexClient = o2;
     }
@@ -352,7 +352,7 @@ public class Network extends Thread {
      * @param inPacket transaction transferred from the client
      *
      */
-    public /*synchronized*/  static boolean send(Transactions inPacket)
+    public synchronized static boolean send(Transactions inPacket)
     {
         //System.out.println("debug-send call"); debug
         inComingPacket[inputIndexClient].setAccountNumber(inPacket.getAccountNumber());
@@ -390,7 +390,7 @@ public class Network extends Thread {
      * @param outPacket updated transaction received by the client
      *
      */
-    public /*synchronized*/  static boolean receive(Transactions outPacket)
+    public synchronized static boolean receive(Transactions outPacket)
     {
 
         outPacket.setAccountNumber(outGoingPacket[outputIndexClient].getAccountNumber());
@@ -427,7 +427,7 @@ public class Network extends Thread {
      * @param outPacket updated transaction transferred by the server to the network output buffer
      *
      */
-    public /*synchronized*/  static boolean transferOut(Transactions outPacket)
+    public synchronized static boolean transferOut(Transactions outPacket)
     {
         //System.out.println("Call TransferOut method ->Input index server: " + inputIndexServer); debug
         outGoingPacket[inputIndexServer].setAccountNumber(outPacket.getAccountNumber());
@@ -464,7 +464,7 @@ public class Network extends Thread {
      * @param inPacket transaction transferred from the input buffer to the server
      *
      */
-    public /*synchronized*/  static boolean transferIn(Transactions inPacket) // added synchronized
+    public synchronized static boolean transferIn(Transactions inPacket) // added synchronized
     {
         //System.out.println("Call TransferIn method -> Output Index server: " + outputIndexServer); debug
         inPacket.setAccountNumber(inComingPacket[outputIndexServer].getAccountNumber());
@@ -577,6 +577,6 @@ public class Network extends Thread {
         }
 
         System.out.println("\n Terminating network thread - Client disconnected Server disconnected");
-        //this.interrupt();
+        this.interrupt();
     }
 }
