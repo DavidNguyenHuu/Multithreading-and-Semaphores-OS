@@ -246,13 +246,13 @@ public class Server extends Thread {
         /* Process the accounts until the client disconnects */
         while ((!Network.getClientConnectionStatus().equals("disconnected")))
         {
-            synchronized (Server.class) // synchronize server class
-            {
+           /* synchronized (Server.class) // synchronize server class
+            {*/
                 if (!Network.getInBufferStatus().equals("empty"))
                 {
                     /* System.out.println("\n DEBUG : Server.processTransactions() - transferring in account " + trans.getAccountNumber()); */
                     Network.transferIn(trans);                              /* Transfer a transaction from the network input buffer */
-
+                    
                     accIndex = findAccount(trans.getAccountNumber());
 
                     if (accIndex == -1)
@@ -285,24 +285,23 @@ public class Server extends Thread {
                     /* while network status is inactive, yield.
                        If buffer is full, yield. (Producer-Consumer) <- Note tutorial
                      */
-                    while (Network.getNetworkStatus().equals("inactive") ||
-                            Network.getOutBufferStatus().equals("full") ||
-                            Network.getClientConnectionStatus().equals("disconnected")) {
-                        Thread.yield();
-                    }
-
+					/*
+					 * while (Network.getNetworkStatus().equals("inactive") ||
+					 * Network.getOutBufferStatus().equals("full") ||
+					 * Network.getClientConnectionStatus().equals("disconnected")) { Thread.yield();
+					 * }
+					 */
                     Network.transferOut(trans);                                    /* Transfer a completed transaction from the server to the network output buffer */
 
                     setNumberOfTransactions((getNumberOfTransactions() + 1));    /* Count the number of transactions processed */
 
                 }
                 //In case the buffer is empty, we yield.
-                else
-                {
-                    Thread.yield();
-                }
+				/*
+				 * else { Thread.yield(); }
+				 */
 
-            }
+            //}
         }
 
         /* System.out.println("\n DEBUG : Server.processTransactions() - " + getNumberOfTransactions() + " accounts updated"); */
