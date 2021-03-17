@@ -157,11 +157,14 @@ public class Client extends Thread {
         while (i < getNumberOfTransactions())
         {
 
-            // While buffer is full, yield. While status is inactive, yield. While connection status is not connected, yield.
-            while( Network.getInBufferStatus().equals("full") || Network.getNetworkStatus().equals("inactive") || Network.getServerConnectionStatus().equals("disconnected") )
-            {
-                Thread.yield();
-            };
+			/*
+			 * // While buffer is full, yield. While status is inactive, yield. While
+			 * connection status is not connected, yield. while(
+			 * Network.getInBufferStatus().equals("full") ||
+			 * Network.getNetworkStatus().equals("inactive") ||
+			 * Network.getServerConnectionStatus().equals("disconnected") ) {
+			 * Thread.yield(); };
+			 */
 
             transaction[i].setTransactionStatus("sent");   /* Set current transaction status */
 
@@ -186,12 +189,11 @@ public class Client extends Thread {
 
         while (i < getNumberOfTransactions())
         {
-            while (Network.getOutBufferStatus().equals("empty") ||
-                    Network.getClientConnectionStatus().equals("disconnected") ||
-                    Network.getNetworkStatus().equals("inactive"))
-            {
-                Thread.yield();
-            };
+			/*
+			 * while (Network.getOutBufferStatus().equals("empty") ||
+			 * Network.getClientConnectionStatus().equals("disconnected") ||
+			 * Network.getNetworkStatus().equals("inactive")) { Thread.yield(); };
+			 */
 
             Network.receive(transact);                               	/* Receive updated transaction from the network buffer */
 
@@ -221,10 +223,10 @@ public class Client extends Thread {
      */
     public void run()
     {
-        //If client is not initialized thread will yield
-        while (!client_exist)
-            Thread.yield();
-
+		/*
+		 * //If client is not initialized thread will yield while (!client_exist)
+		 * Thread.yield();
+		 */
         Transactions transact = new Transactions();
 
         // Check client operation, whether it is sending or receiving
@@ -232,7 +234,7 @@ public class Client extends Thread {
         {
             sendTransactions();
             System.out.println("\n Terminating client sending thread"); // add sending time
-            this.interrupt();
+            //this.interrupt();
         }
         if (getClientOperation().equals("receiving"))
         {
