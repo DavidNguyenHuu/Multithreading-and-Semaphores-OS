@@ -14,6 +14,6 @@ application.
 client has 2 threads, one for sending the transactions and another for receiving 
 the completed transactions. 
 
-Essentially it is a consumer-producer problem:
+Essentially it is a <b>consumer-producer</b> problem:
 
 ![Capture](https://user-images.githubusercontent.com/37845640/114466099-0084fa00-9bb6-11eb-9622-872a5f3144e8.JPG)
