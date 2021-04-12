@@ -8,3 +8,8 @@ The following diagram illustrates the classes for the client-server banking
 application. 
 
 ![Capture](https://user-images.githubusercontent.com/37845640/114465761-8d7b8380-9bb5-11eb-97d5-678d4588faed.JPG)
+
+ 
+4 threads are implemented so that the client, the server and the network can all run concurrently. The 
+client has 2 threads, one for sending the transactions and another for receiving 
+the completed transactions. 
